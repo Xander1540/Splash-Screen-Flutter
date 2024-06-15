@@ -25,6 +25,8 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
 
+  var nameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
    return Scaffold(
@@ -33,14 +35,30 @@ class MyHomePage extends StatelessWidget {
         title: Text('HomePage'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('HomePage', style: TextStyle(fontSize: 25)),
-            ElevatedButton(onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> ProfilePage()));
-            }, child: Text('Next'))
-          ]
+        child: Container(
+          width: 300,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text('HomePage', style: TextStyle(fontSize: 25)),
+
+              SizedBox(height: 10),
+
+              TextField(controller: nameController,),
+
+              SizedBox(height: 10),
+
+              ElevatedButton(onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> ProfilePage(nameController.text.toString())));
+              }, child: Text('Profile', style: TextStyle(color: Colors.black)),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue.shade100,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.zero
+                )
+              ),)
+            ]
+          ),
         ),
       )
     );
